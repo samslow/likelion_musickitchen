@@ -1,0 +1,26 @@
+<h1>현재 재생목록</h1>
+<ol class='playlist'>
+<% @musics.each do |m| %>
+        <li><%=link_to "#{m.title}", "https://www.youtube.com/watch?v=#{m.vid}"%></li>
+<% end %>
+</ol>
+
+<script>
+    function music_inserted(data) {
+      $('.playlist').append(`
+        <li><a href="https://www.youtube.com/watch?v=${data.vid}">${data.title}</a></li>
+      `);
+    }
+    
+    var pusher = new Pusher("<%= ENV["pusher_key"] %>", {
+      cluster: "<%= ENV["pusher_cluster"] %>",
+      encrypted: true
+    });
+    
+    var channel = pusher.subscribe('dashboard');
+    channel.bind('create', function(data) {
+      console.log(data);
+      console.log("재생목록 생성!");
+      music_inserted(data);
+    });
+</script>

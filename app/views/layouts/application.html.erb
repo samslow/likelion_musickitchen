@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>LikelionMusicKitchen</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+        <script src="https://js.pusher.com/4.1/pusher.min.js"></script>
+
+  </head>
+
+  <body>
+    <%= yield %>
+  </body>
+</html>
