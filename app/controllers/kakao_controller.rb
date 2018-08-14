@@ -6,10 +6,10 @@ class KakaoController < ApplicationController
     }
     render json: @keyboard
   end
-  
+
   def message
     @user_msg = params[:content] #사용자의 입력값
-    
+
     if @user_msg == "음악 신청하기"
       @text = "YouTube Link를 입력 해 주세요!\n* 길이 5분이내\n* 음악링크만 보내주세요"
     elsif @user_msg == "화면에 메시지 띄우기"
@@ -18,7 +18,7 @@ class KakaoController < ApplicationController
       @text = "사용방법 있서영? 아뇨 엄서영 ㅜㅜ"
     else
       # @video = RestClient.get("https://www.googleapis.com/youtube/v3/videos?part=snippet&id=G8bTSVo2jYc&key=AIzaSyBr0ucOpgqTMXLNUw_8ePDP8kkaPG87q-E")
-      # @text = 
+      # @text =
       if @user_msg.include?("?v=")
         @video_id = @user_msg.split('?v=')[1]
         @video = Yt::Video.new id: @video_id
@@ -34,9 +34,9 @@ class KakaoController < ApplicationController
         @text = @video_id
       end
     end
-    
+
     @return_msg = {
-      :text => @text 
+      :text => @text
     }
     @keyboard_init = {
       :type => "buttons",
@@ -58,8 +58,9 @@ class KakaoController < ApplicationController
     end
     render json: @result
   end
-  
+
   def show
     @musics = Music.all
+    @vids = @musics.pluck("vid")
   end
 end
