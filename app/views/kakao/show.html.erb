@@ -4,19 +4,63 @@
         <li><%=link_to "#{m.title}", "https://www.youtube.com/watch?v=#{m.vid}"%></li>
 <% end %>
 </ol>
+<div id="player"></div>
 
 <script>
+    var tag = document.createElement('script');
+
+    tag.src = "https://www.youtube.com/iframe_api";
+    var firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+    var player;
+    var playlist = <%= raw @vids %>
+    var previousIndex = 0;
+
+    $(window).load(function(){
+      player = new YT.Player('player', {
+            // height: '240',
+            // width: '300',
+            playerVars : {
+                playlist: playlist.join(','),
+            },
+            events: {
+              onStateChange: function(event) {
+                    if(event.data == -1) {
+                        // get current video index
+                        var index = player.getPlaylistIndex();
+                        // update when playlists do not match
+                        if(player.getPlaylist().length != playlist.length) {
+                          // update playlist and start playing at the proper index
+                          player.loadPlaylist(playlist, previousIndex+1);
+                        }
+                        previousIndex = index;
+                    }
+                }
+        }
+      });
+    });
+
+    setTimeout(function() {
+      player.playVideo();
+      player.setLoop(true);
+    }, 3000);
+
+
+
+
+
     function music_inserted(data) {
+      playlist.push(data.vid);
       $('.playlist').append(`
         <li><a href="https://www.youtube.com/watch?v=${data.vid}">${data.title}</a></li>
       `);
     }
-    
+
     var pusher = new Pusher("<%= ENV["pusher_key"] %>", {
       cluster: "<%= ENV["pusher_cluster"] %>",
       encrypted: true
     });
-    
+
     var channel = pusher.subscribe('dashboard');
     channel.bind('create', function(data) {
       console.log(data);
