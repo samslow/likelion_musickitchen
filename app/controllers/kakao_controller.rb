@@ -22,13 +22,13 @@ class KakaoController < ApplicationController
       if @user_msg.include?("?v=")
         @video_id = @user_msg.split('?v=')[1]
         @video = Yt::Video.new id: @video_id
-        Music.create(title: @video.title, vid: @video.id)
+        Music.create(title: @video.title, vid: @video.id, length: @video.length)
         @text = "재생목록에 \n" + @video.title + "\n(이)가 추가되었습니다."
-      # elsif @user_msg[-12] == "/"
-      #   @video_id = @user_msg.last(11)
-      #   @video = Yt::Video.new id: @video_id
-      #   Music.create(title: @video.title)
-      #   @text = "재생목록에 \n" + @video.title + "\n(이)가 추가되었습니다."
+      elsif @user_msg[-12] == "/"
+        @video_id = @user_msg.last(11)
+        @video = Yt::Video.new id: @video_id
+        Music.create(title: @video.title, vid: @video.id, length: @video.length)
+        @text = "재생목록에 \n" + @video.title + "\n(이)가 추가되었습니다."
       else
         @text = "잘못된 YouTube 주소를 입력하셨습니다."
         @text = @video_id

@@ -1,7 +1,7 @@
-<h1>현재 재생목록</h1>
+<h1>현재 재생목록(<%= @musics.size %>)</h1>
 <ol class='playlist'>
 <% @musics.each do |m| %>
-        <li><%=link_to "#{m.title}", "https://www.youtube.com/watch?v=#{m.vid}"%></li>
+        <li><%=link_to "#{m.title}", "https://www.youtube.com/watch?v=#{m.vid}"%> - <%=m.length %></li>
 <% end %>
 </ol>
 
