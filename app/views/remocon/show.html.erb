@@ -1,0 +1,36 @@
+<h1>리모콘 ㄲ</h1>
+
+<table>
+  <tbody>
+    <tr>
+      <th>id</th>
+      <th>제목</th>
+      <th>버튼</th>
+    </tr>
+    <% @musics.each do |music| %>
+      <tr>
+        <td><%= music.id %></td>
+        <td><a href="https://www.youtube.com/watch?v=<%= music.vid %>"><%= music.title %></a></td>
+        <td>
+          <a href="/delete_list/<%= music.vid %>" data-remote="true">리스트 제거</a>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+<hr>
+<a href="remocon/previous" data-remote="true">이전 곡</a>
+<a href="remocon/next" data-remote="true">다음 곡</a>
+
+<hr>
+<h5>음악 추가</h5>
+<form action="remocon/musics" method="post" data-remote="true">
+  <input type="text" name="url" id="urls" value="">
+  <input type="submit">
+</form>
+<hr>
+<h5>메세지 추가</h5>
+<form action="remocon/messages" method="post" data-remote="true">
+  <input type="text" name="body" id="messages" value="">
+  <input type="submit">
+</form>

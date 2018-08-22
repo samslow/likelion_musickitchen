@@ -3,9 +3,9 @@
         <div id="text-section" class="text-section">
             <ul id="card-target" class="card-container"> <!-- 메세지 컨테이너 -->
               <!--메세지  내용-->
-                <li class="card" id="card-anchor">뮤직키친 화이팅!</li></ul>
+                <li class="card" id="card-anchor">멋사 6기 해커톤 시작합니다!!!!</li></ul>
         </div>
-        <input id="href"> <button onclick="generate()">Generate</button>
+        <!-- <input id="href"> <button onclick="generate()">Generate</button> -->
         <div class="audio-section">
             <div id="video-placeholder"></div>
             <div class="player-container">
@@ -49,9 +49,10 @@
     <script src="https://www.youtube.com/iframe_api"></script>
 
     <script type="text/javascript">
+      var first = "7PrxONon7jg"
       var playlist = <%= raw @vids %>
       var playlist_json = <%= raw @playlists %>
-      var previousIndex = -1
+      var previousIndex = 0
       /*유튜브 플레이어 정의*/
       var player,time_update_interval = 0;
 
@@ -59,7 +60,7 @@
           player = new YT.Player('video-placeholder', {
               width: 600,
               height: 400,
-              videoId: 'pHYWdjBmRm8',
+              videoId: first,
               playerVars: {
                   color: 'white',
                   autoplay: 1,
@@ -71,6 +72,12 @@
               }
           });
       }
+
+      setTimeout(function() {
+        playlist.splice(0,0,first)
+        playlist_json.splice(0,0,first)
+      }, 5000);
+
       /* 유튜브 컨트롤러 정의*/
       function initialize(){
           updateTimerDisplay();
@@ -169,15 +176,21 @@
       }
 
       /* 텍스트 메세지 생성자*/
-      function generate() {
+      function generate(valueOfTest) {
           var parentTarget = document.getElementById('card-target');
           parentTarget.lastChild.removeAttribute("id");
           var a = document.createElement('li');
-          var valueOfTest = document.getElementById('href').value; /*현재 테스트용 텍스트 입력을 받으면 여기서 벨류 받아와서 들어감 여기로 메세지 넣으면 될듯*/
+          // var valueOfTest = document.getElementById('href').value; /*현재 테스트용 텍스트 입력을 받으면 여기서 벨류 받아와서 들어감 여기로 메세지 넣으면 될듯*/
           a.appendChild(document.createTextNode(valueOfTest));
           a.classList.add('card');
           a.setAttribute("id", "card-anchor");
           parentTarget.appendChild(a);
+          // element 삭제
+          if(parentTarget.childElementCount > 10){
+            console.log("[generate] 텍스트 삭제")
+            parentTarget.firstElementChild.remove();
+          }
+
           (function () {
               var anchor = document.getElementById("card-anchor");
               var topPosition = anchor.offsetTop;
@@ -211,10 +224,10 @@
         console.log("[changeList] previousIndex : " + n)
         console.log("[changeList] playlist_json.length : " + playlist_json.length)
 
-        if(n == -1){
+        if(n == 0){
           $("#present-video").text(title)
-          $("#next-video").text(playlist_json[n + 1].title)
-          $("#next-next-video").text(playlist_json[n + 2].title)
+          $("#next-video").text(playlist_json[n].title)
+          $("#next-next-video").text(playlist_json[n + 1].title)
         }else if(n == playlist_json.length - 1){
           $("#present-video").text(playlist_json[n].title)
           $("#next-video").empty();
@@ -249,6 +262,9 @@
             console.log("[channel::Music] 우선예약")
             super_booking(data.result);
           }
+        }else if(data.code == 1){
+          console.log("[channel] 메세지 추가!")
+          generate(data.result.body)
         }
 
       });

@@ -63,8 +63,9 @@ class KakaoController < ApplicationController
     @musics = Music.all
     @vids = @musics.pluck("vid")
     @playlists = @musics.to_json
-    if params[:wonno]
-      render 'show2'
-    end
+  end
+
+  def remocon
+    @musics = Music.all
   end
 end
