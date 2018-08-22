@@ -10,6 +10,7 @@ gem 'nokogiri'
 gem 'yt', '~> 0.28.0'
 gem 'figaro'
 gem 'pusher'
+# gem 'acts_as_list'
 # gem 'pry-rails'
 
 

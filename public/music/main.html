@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css"/>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+
+</head>
+<body>
+    <div class="content">
+        <div id="text-section" class="text-section">
+            <ul id="card-target" class="card-container">
+                <li class="card">테스트용입니다.</li>
+                <li class="card">테스트용입니다.</li>
+                <li class="card">테스트용입니다.</li>
+                <li class="card">테스트용입니다.</li>
+                <li class="card">테스트용입니다.</li>
+                <li class="card">테스트용입니다.</li>
+                <li class="card">테스트용입니다.</li>
+                <li class="card">테스트용입니다.</li>
+                <li class="card">테스트용입니다.</li>
+                <li class="card" id="card-anchor">테스트용입니다.</li></ul>
+        </div>
+        <input id="href"> <button onclick="generate()">Generate</button>
+        <div class="audio-section">
+            <div id="video-placeholder"></div>
+            <div class="player-container">
+                <div id="controls">
+                    <div class="up-section">
+                        <div class="title-section">
+                            <span>[MV] 블랙핑크 - ddu du ddu duddu du ddu duddu du du</span> <!--현재 -->
+                        </div>
+                        <div class="progress-section">
+                            <div class="progress-part"><input type="range" id="progress-bar" value="0"></div>
+                            <div class="time-part">
+                                <div id="current-time">0:00</div>
+                                <div id="duration">0:00 </div>
+                            </div> 
+                        </div>
+                        <div class="play-section"> 
+                            <i id="prev" class="material-icons">fast_rewind</i>
+                            <i id="play-toggle" class="material-icons">play_arrow</i>
+                            <i id="next" class="material-icons">fast_forward</i>
+                        </div>
+                    </div>
+                    <div class="volume-section">
+                        <i id="mute-toggle" class="material-icons">volume_up</i>
+                        <input type="range" id="volume-input" value="0">
+                    </div>
+                </div>
+                <div id="music-title">
+                    <div class="title-container">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Enim harum s
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://www.youtube.com/iframe_api"></script>
+    <script src="main.js"></script>
+</body>
+</html>
