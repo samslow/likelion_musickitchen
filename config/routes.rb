@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   post '/message' => 'kakao#message'
   get 'remocon' => "remocon#show"
 
+  get 'remocon/delete_list/:id' => "remocon#delete"
   get 'remocon/previous' => "remocon#previous"
   get 'remocon/next' => "remocon#next"
 

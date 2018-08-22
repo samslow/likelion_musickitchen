@@ -34,6 +34,14 @@ class RemoconController < ApplicationController
     end
   end
 
+  def delete
+    @music = Music.find(params[:id])
+    @music.delete
+    respond_to do |format|
+      format.js
+    end
+  end
+
   def show
     @musics = Music.all
   end

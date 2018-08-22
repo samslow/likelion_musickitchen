@@ -1,5 +1,9 @@
-<h1>리모콘 ㄲ</h1>
-
+<h1>리모콘 입니당</h1>
+<hr>
+<p>
+  리스트 삭제는 실시간 적용이 아닙니다!
+  새로고침 후에 반영됩니다.
+</p>
 <table>
   <tbody>
     <tr>
@@ -8,11 +12,11 @@
       <th>버튼</th>
     </tr>
     <% @musics.each do |music| %>
-      <tr>
+      <tr id="<%= music.id %>">
         <td><%= music.id %></td>
         <td><a href="https://www.youtube.com/watch?v=<%= music.vid %>"><%= music.title %></a></td>
         <td>
-          <a href="/delete_list/<%= music.vid %>" data-remote="true">리스트 제거</a>
+          <a href="remocon/delete_list/<%= music.id %>" data-remote="true">리스트 제거</a>
         </td>
       </tr>
     <% end %>
