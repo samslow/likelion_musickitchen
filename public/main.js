@@ -1,38 +1,24 @@
-var moveByElem = function(elem) {
-    $(".animate-next").removeClass("animate-next");
-    $('.next').addClass("animate-next").removeClass("next");
-    var $prev = elem.prev()[0] != null ? elem.prev() : $('li:last-child');
-    var $next = elem.next()[0] != null ? elem.next() : $('li:first-child');
-    elem.attr('class', 'card active');
-    $next.attr('class', 'card next');
-    $prev.attr('class', 'card prev');
-};
 
-$(document).keydown(function(event) {
-    if (event.keyCode == '32') {
-        var $elem = $('.prev')
-        moveByElem($elem);
-    }
-  });
-
+/*유튜브 플레이어 정의*/
 var player,time_update_interval = 0;
 
 function onYouTubeIframeAPIReady() {
     player = new YT.Player('video-placeholder', {
         width: 600,
         height: 400,
-        videoId: 'Xa0Q0J5tOP0',
+        videoId: 'pHYWdjBmRm8',
         playerVars: {
             color: 'white',
             autoplay: 1,
-            playlist: 'taJ60kskkns,FG0fTKAqZ5g'
+            playlist: playlist.join(','),
         },
         events: {
-            onReady: initialize
+            onReady: initialize,
+            onStateChange: stateChange
         }
     });
 }
-
+/* 유튜브 컨트롤러 정의*/
 function initialize(){
     updateTimerDisplay();
     updateProgressBar();
@@ -44,6 +30,26 @@ function initialize(){
     $('#volume-input').val(Math.round(player.getVolume()));
 }
 
+// 수노의 개꿀딱 코드 복사
+function stateChange(e){
+  if(event.data == -1) {
+      console.log("gogo")
+      // get current video index
+      var index = player.getPlaylistIndex();
+      // update when playlists do not match
+      if(player.getPlaylist().length != playlist.length) {
+        // update playlist and start playing at the proper index
+        player.loadPlaylist(playlist, previousIndex+1);
+      }
+      previousIndex = index;
+  }
+}
+
+// 우선 예약 코드
+function super_booking(data) {
+  playlist.splice(previousIndex, 0 ,data.vid)
+}
+
 function updateTimerDisplay(){
     $('#current-time').text(formatTime( player.getCurrentTime() ));
     $('#duration').text(formatTime( player.getDuration() ));
@@ -52,7 +58,6 @@ function updateTimerDisplay(){
 function updateProgressBar(){
     $('#progress-bar').val((player.getCurrentTime() / player.getDuration()) * 100);
 }
-
 
 
 // Progress bar
@@ -108,11 +113,12 @@ function formatTime(time){
     return minutes + ":" + seconds;
 }
 
+/* 텍스트 메세지 생성자*/
 function generate() {
     var parentTarget = document.getElementById('card-target');
     parentTarget.lastChild.removeAttribute("id");
     var a = document.createElement('li');
-    var valueOfTest = document.getElementById('href').value;
+    var valueOfTest = document.getElementById('href').value; /*현재 테스트용 텍스트 입력을 받으면 여기서 벨류 받아와서 들어감 여기로 메세지 넣으면 될듯*/
     a.appendChild(document.createTextNode(valueOfTest));
     a.classList.add('card');
     a.setAttribute("id", "card-anchor");

@@ -1,4 +1,4 @@
-/* http://meyerweb.com/eric/tools/css/reset/
+/* http://meyerweb.com/eric/tools/css/reset/ 
    v2.0 | 20110126
    License: none (public domain)
 */
@@ -12,8 +12,8 @@ b, u, i, center,
 dl, dt, dd, ol, ul, li,
 fieldset, form, label, legend,
 table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed,
-figure, figcaption, footer, header, hgroup,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
 menu, nav, output, ruby, section, summary,
 time, mark, audio, video {
 	margin: 0;
@@ -24,7 +24,7 @@ time, mark, audio, video {
 	vertical-align: baseline;
 }
 /* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure,
+article, aside, details, figcaption, figure, 
 footer, header, hgroup, menu, nav, section {
 	display: block;
 }
@@ -46,15 +46,15 @@ table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
-
+/* 아래부터가 실제 작성 코드 위에는 css 초기화용 코드 */
 body {
   height: 100vh;
   width: 100vw;
   background: #fff;
   overflow: hidden;
-
+  
 }
-
+/* 배경 블러처리를 위한 코드 */
 .content {
   position: relative;
 }
@@ -74,38 +74,27 @@ body {
   height: 110%;
   filter: blur(20px);
 }
-
-.card-container{
-  width: 80%;
-  background: rgba(0,0,0,0.3);
-  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
-  margin : 0 auto 0 auto;
-  height: 90%;
-  padding-bottom: 30px;
-  border-radius: 10px;
-  overflow: hidden;
-}
+/* 내부 섹션부 높이 지정 */
 .text-section{
-  height: 65vh;
+  height: 60vh;
   width: 100vw;
 }
 .audio-section{
-  height: 35vh;
+  height: 40vh;
   width: 100vw;
 }
 
-
+/* 비디오 숨기기 */
 #video-placeholder{
   width: 100%;
   position: fixed;
   top: -999999px;
 }
-
+/* 아이콘 사이즈 정의 */
 #controls i {
   color: #000;
   cursor: pointer;
 }
-
 
 #next,
 #prev{
@@ -116,7 +105,7 @@ body {
 #play-toggle{
   font-size: 60px;
 }
-
+/*  */
 .player-container{
   margin: auto;
   height: 90%;
@@ -184,9 +173,10 @@ body {
   width: 100%;
 }
 
+/* 현재 재생중인 음악 흐르는 타이틀 */
 .title-container{
   padding-left: 25px;
-  white-space: nowrap;
+  white-space: nowrap; 
   height: 70px;
   border-bottom: solid rgba(100,100,100,0.6) 1px;
   overflow:hidden;
@@ -207,33 +197,39 @@ body {
 	animation: rightcrawl 9s linear infinite;
 }
 
-
+/* 
 #target{
-  font-weight:600;
+  font-weight:600; 
   text-shadow:  0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
-}
+} */
 
+/* 메세지 카드 정의 */
 .card{
-  width: 80%;
+  width: 60%;
   background: rgba(248,248,248,0.7);
-  border-radius: 8px;
+  border-radius: 10px;
   font-size: 60px;
   font-weight: 300;
-  margin: 3px auto 0 auto;
+  margin: 5px auto 0 auto;
   text-align: center;
   padding:40px 10px 40px 10px;
   box-shadow:0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
 }
 
-.card-container{
-  overflow: scroll;
+#card-anchor{
+  animation: fadein 0.25s ease-in-out;
 }
 
-#card-anchor{
-  animation: fadein 0.3s ease-in-out;
+.card-container{
+  width: 100%;
+  margin : 0 auto 0 auto;
+  height: 90%;
+  overflow: scroll;
+  border-radius: 10px;
 }
+
 
 @keyframes fadein {
-  from { opacity: 0; transform: scale(1.15)}
+  from { opacity: 0; transform: scale(1.3)}
   to   { opacity: 1; transform: scale(1.0)}
 }
