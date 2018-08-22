@@ -16,7 +16,7 @@ class RemoconController < ApplicationController
   end
 
   def musics
-    Music.create_by_yt(params[:url])
+    @music = Music.create_by_yt(params[:url])
     respond_to do |format|
       format.js
     end

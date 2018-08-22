@@ -5,20 +5,14 @@
   새로고침 후에 반영됩니다.
 </p>
 <table>
-  <tbody>
+  <tbody id="list">
     <tr>
       <th>id</th>
       <th>제목</th>
       <th>버튼</th>
     </tr>
     <% @musics.each do |music| %>
-      <tr id="<%= music.id %>">
-        <td><%= music.id %></td>
-        <td><a href="https://www.youtube.com/watch?v=<%= music.vid %>"><%= music.title %></a></td>
-        <td>
-          <a href="remocon/delete_list/<%= music.id %>" data-remote="true">리스트 제거</a>
-        </td>
-      </tr>
+      <%= render "tr", music: music %>
     <% end %>
   </tbody>
 </table>

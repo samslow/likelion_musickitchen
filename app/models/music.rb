@@ -12,7 +12,8 @@ class Music < ApplicationRecord
       if url.include?("?v=")
         vid = url.split('?v=')[1]
         video = Yt::Video.new id: vid
-        Music.create(title: video.title, vid: video.id, duration: video.duration, status: status)
+        music = Music.create(title: video.title, vid: video.id, duration: video.duration, status: status)
+        return music
       else
         return false
       end
