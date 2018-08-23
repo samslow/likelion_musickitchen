@@ -33,12 +33,21 @@ class KakaoController < ApplicationController
       elsif ($choice_flag == 1)
         Message.create(body: @user_msg)
         @text = "전광판으로 \n \"#{@user_msg}\" \n 을(를) 보냈습니다."
-        $choice_flag == 0
       end
     end
 
     @return_msg = {
       :text => @text
+    }
+    @return_easter ={
+      :text => "뮤직 키친의 개발자들을 소개합니다!\n동국대 노종원!\n아주대 장순호!!\n강원대 서현석!!!\n이화여대 엄서영!!!!"
+    }
+    @return_msg_chat ={
+      :text => @text,
+      :message_button => {
+        :label => "전광판 보러가기",
+        :url => "https://rocky-coast-76546.herokuapp.com/"
+        }
     }
     @keyboard_init = {
       :type => "buttons",
@@ -57,6 +66,17 @@ class KakaoController < ApplicationController
         message:  @return_msg,
         :keyboard => @keyboard_applytext
       }
+    elsif @user_msg == "개발자"
+      @result = {
+        :message => @return_easter,
+        :keyboard => @keyboard_init
+      }
+    elsif ($choice_flag == 1) 
+      @result = {
+        :message => @return_msg_chat,
+        :keyboard => @keyboard_init
+        }
+        $choice_flag = 0
     else
       @result = {
         :message => @return_msg,
