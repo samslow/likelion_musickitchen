@@ -2,7 +2,7 @@ class KakaoController < ApplicationController
   def keyboard
     @keyboard = {
       type: "buttons",
-      :buttons => ["음악 신청하기", "화면에 메시지 띄우기", "사용 방법"]
+      :buttons => ["음악 신청하기", "화면에 메시지 띄우기"]
     }
     render json: @keyboard
   end
@@ -14,8 +14,6 @@ class KakaoController < ApplicationController
       @text = "YouTube Link를 입력 해 주세요!\n* 길이 5분이내\n* 음악링크만 보내주세요"
     elsif @user_msg == "화면에 메시지 띄우기"
       @text = "화면에 메시지를 띄웁니다."
-    elsif @user_msg == "사용 방법"
-      @text = "사용방법 있서영? 아뇨 엄서영 ㅜㅜ"
     else
       # @video = RestClient.get("https://www.googleapis.com/youtube/v3/videos?part=snippet&id=G8bTSVo2jYc&key=AIzaSyBr0ucOpgqTMXLNUw_8ePDP8kkaPG87q-E")
       # @text =
@@ -40,7 +38,7 @@ class KakaoController < ApplicationController
     }
     @keyboard_init = {
       :type => "buttons",
-      :buttons => ["음악 신청하기", "화면에 메시지 띄우기", "사용 방법"]
+      :buttons => ["음악 신청하기", "화면에 메시지 띄우기"]
     }
     @keyboard_applymusic ={
       :type => "text"
