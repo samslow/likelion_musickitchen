@@ -13,6 +13,13 @@
   </head>
 
   <body>
+    <script>
+          var pusher = new Pusher("<%= ENV["pusher_key"] %>", {
+            cluster: "<%= ENV["pusher_cluster"] %>",
+            encrypted: true
+          });
+    </script>
+    
     <%= yield %>
 
   </body>

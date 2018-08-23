@@ -1,7 +1,7 @@
 <tr id="<%= music.id %>">
-  <td><%= music.id %></td>
-  <td><a href="https://www.youtube.com/watch?v=<%= music.vid %>"><%= music.title %></a></td>
+  <td><%= "우선 예약" if is_super %><%= music.id %></td>
+  <td><a href="https://www.youtube.com/watch?v=<%= music.vid %>" target="_blank"><%= music.title %></a></td>
   <td>
-    <a href="remocon/delete_list/<%= music.id %>" data-remote="true">리스트 제거</a>
+    <a href="remocon/delete_list/<%= music.id %>" data-remote="true">제거</a>
   </td>
 </tr>

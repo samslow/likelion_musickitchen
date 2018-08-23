@@ -36,7 +36,7 @@
                     <div class="title-container" id="present-video"><!--노래 제목-->
                       Music Kitchen - 준비중입니다.
                     </div>
-                    <div class="title-container" id="next-video"><!--노래 제목-->
+                    <div class="title-container init" id="next-video"><!--노래 제목-->
                       <span class="blank-music">노래를 신청해주세요.</span>
                     </div>
                     <div class="title-container" id="next-next-video"><!--노래 제목-->
@@ -205,15 +205,62 @@
       function music_inserted(data) {
         playlist.push(data.vid);
         playlist_json.push(data);
+        if ($(".init").length != 0){
+          class_name = $(".init").children("div").prevObject.attr("id")
+          $(".init").text(data.title)
+          if (class_name=="next-video"){
+            $(".title-container").removeClass("init")
+            $("#next-next-video").addClass("init")
+          }else if (class_name=="next-next-video"){
+            $(".title-container").removeClass("init")
+          }
+        }else{
+          $(".title-container").removeClass("init")
+        }
+
+      }
+
+      function music_deleted(index) {
+        playlist.splice(index,1);
+        playlist_json.splice(index,1);
+
       }
 
       // 우선 예약 코드
       function super_booking(data) {
         playlist.splice(previousIndex + 1, 0 ,data.vid)
         playlist_json.splice(previousIndex + 1, 0 ,data)
+        n = previousIndex
+        var max_index = playlist_json.length + n - 1
+        if(max_index - n == 1){
+          $("#next-video").text(playlist_json[n+1].title)
+          $("#next-next-video").empty();
+          $("#next-next-video").addClass("init")
+          $("#next-next-video").append(`<span class="blank-music">노래를 신청해주세요.</span>`)
+        }else if(max_index - n == 0){
+          $("#next-video").empty();
+          $("#next-video").addClass("init");
+          $("#next-video").append(`<span class="blank-music">노래를 신청해주세요.</span>`)
+          $("#next-next-video").empty();
+          $("#next-next-video").append(`<span class="blank-music">노래를 신청해주세요.</span>`)
+        }else if(max_index -n > 1){
+          $("#next-video").text(playlist_json[n+1].title)
+          $("#next-next-video").text(playlist_json[n+2].title)
+        }
 
-        $("#next-video").text(playlist_json[previousIndex + 1].title)
-        $("#next-next-video").text(playlist_json[previousIndex + 2].title)
+        if ($(".init").length != 0){
+          class_name = $(".init").children("div").prevObject.attr("id")
+          // $(".init").text(data.title)
+          if (class_name=="next-video"){
+            $(".title-container").removeClass("init")
+            $("#next-next-video").addClass("init")
+          }else if (class_name=="next-next-video"){
+            $(".title-container").removeClass("init")
+          }
+        }else{
+          $(".title-container").removeClass("init")
+        }
+
       }
 
       // 현재 재생중인 음악
@@ -225,14 +272,29 @@
       function changeList(n,title){
         console.log("[changeList] previousIndex : " + n)
         console.log("[changeList] playlist_json.length : " + playlist_json.length)
-
+        $(".title-container").removeClass("init")
+        var max_index = playlist_json.length + n - 1
         if(n == 0){
           $("#present-video").text(title)
-          $("#next-video").text(playlist_json[n + 1].title)
-          $("#next-next-video").text(playlist_json[n + 2].title)
+          if(max_index - n == 1){
+            $("#next-video").text(playlist_json[n+1].title)
+            $("#next-next-video").empty();
+            $("#next-next-video").addClass("init")
+            $("#next-next-video").append(`<span class="blank-music">노래를 신청해주세요.</span>`)
+          }else if(max_index - n == 0){
+            $("#next-video").empty();
+            $("#next-video").addClass("init");
+            $("#next-video").append(`<span class="blank-music">노래를 신청해주세요.</span>`)
+            $("#next-next-video").empty();
+            $("#next-next-video").append(`<span class="blank-music">노래를 신청해주세요.</span>`)
+          }else if(max_index -n > 1){
+            $("#next-video").text(playlist_json[n+1].title)
+            $("#next-next-video").text(playlist_json[n+2].title)
+          }
         }else if(n == playlist_json.length - 1){
           $("#present-video").text(playlist_json[n].title)
           $("#next-video").empty();
+          $("#next-video").addClass("init");
           $("#next-video").append(`<span class="blank-music">노래를 신청해주세요.</span>`)
           $("#next-next-video").empty();
           $("#next-next-video").append(`<span class="blank-music">노래를 신청해주세요.</span>`)
@@ -240,18 +302,27 @@
           $("#present-video").text(playlist_json[n].title)
           $("#next-video").text(playlist_json[n+1].title)
           $("#next-next-video").empty();
+          $("#next-next-video").addClass("init")
           $("#next-next-video").append(`<span class="blank-music">노래를 신청해주세요.</span>`)
         }else{
           $("#present-video").text(playlist_json[n].title)
-          $("#next-video").text(playlist_json[n+1].title)
-          $("#next-next-video").text(playlist_json[n+2].title)
+          if(max_index - n == 1){
+            $("#next-video").text(playlist_json[n+1].title)
+            $("#next-next-video").empty();
+            $("#next-next-video").addClass("init")
+            $("#next-next-video").append(`<span class="blank-music">노래를 신청해주세요.</span>`)
+          }else if(max_index - n == 0){
+            $("#next-video").empty();
+            $("#next-video").addClass("init");
+            $("#next-video").append(`<span class="blank-music">노래를 신청해주세요.</span>`)
+            $("#next-next-video").empty();
+            $("#next-next-video").append(`<span class="blank-music">노래를 신청해주세요.</span>`)
+          }else if(max_index -n > 1){
+            $("#next-video").text(playlist_json[n+1].title)
+            $("#next-next-video").text(playlist_json[n+2].title)
+          }
         }
       }
-
-      var pusher = new Pusher("<%= ENV["pusher_key"] %>", {
-        cluster: "<%= ENV["pusher_cluster"] %>",
-        encrypted: true
-      });
 
       var channel = pusher.subscribe('dashboard');
       channel.bind('create', function(data) {
@@ -274,7 +345,19 @@
           }else if (data.result == "next"){
             console.log("[channel] 리모콘 작동! : 다음 곡")
             player.nextVideo()
+          }else if (data.result == "play"){
+            console.log("[channel] 리모콘 작동! : 재생")
+            player.playVideo();
+            $('#play-toggle').text("pause");
+          }else if (data.result == "stop"){
+            console.log("[channel] 리모콘 작동! : 중지")
+            player.pauseVideo();
+            $('#play-toggle').text("play_arrow");
           }
+        }else if(data.code == 3){
+          console.log("[channel] 리모콘 작동! : ["+ data.result.title + "]삭제")
+          music_deleted(data.index)
+          changeList(previousIndex,$("#present-video").text())
         }
       });
 

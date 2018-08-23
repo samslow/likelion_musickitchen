@@ -6,8 +6,11 @@ Rails.application.routes.draw do
   get 'remocon/delete_list/:id' => "remocon#delete"
   get 'remocon/previous' => "remocon#previous"
   get 'remocon/next' => "remocon#next"
+  get 'remocon/play' => "remocon#play"
+  get 'remocon/stop' => "remocon#stop"
 
   post 'remocon/musics'
+  post 'remocon/super_musics'
   post 'remocon/messages'
 
   root 'kakao#show'
