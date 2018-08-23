@@ -64,7 +64,7 @@
               playerVars: {
                   color: 'white',
                   autoplay: 1,
-                  playlist: setFirst(playlist),
+                  playlist: playlist.join(','),
               },
               events: {
                   onReady: initialize,
@@ -73,12 +73,10 @@
           });
       }
 
-      function setFirst(playlist) {
-        old_playlist = playlist
+      setTimeout(function() {
         playlist.splice(0,0,first)
         playlist_json.splice(0,0,first)
-        return old_playlist.join(',')
-      }
+      }, 5000);
 
       /* 유튜브 컨트롤러 정의*/
       function initialize(){
@@ -228,8 +226,8 @@
 
         if(n == 0){
           $("#present-video").text(title)
-          $("#next-video").text(playlist_json[n + 1].title)
-          $("#next-next-video").text(playlist_json[n + 2].title)
+          $("#next-video").text(playlist_json[n].title)
+          $("#next-next-video").text(playlist_json[n + 1].title)
         }else if(n == playlist_json.length - 1){
           $("#present-video").text(playlist_json[n].title)
           $("#next-video").empty();
@@ -267,15 +265,8 @@
         }else if(data.code == 1){
           console.log("[channel] 메세지 추가!")
           generate(data.result.body)
-        }else if(data.code == 2){
-          if(data.result == "previous"){
-            console.log("[channel] 리모콘 작동! : 이전 곡")
-            player.previousVideo()
-          }else if (data.result == "next"){
-            console.log("[channel] 리모콘 작동! : 다음 곡")
-            player.nextVideo()
-          }
         }
+
       });
 
     </script>

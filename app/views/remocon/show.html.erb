@@ -1,0 +1,34 @@
+<h1>리모콘 입니당</h1>
+<hr>
+<p>
+  리스트 삭제는 실시간 적용이 아닙니다!
+  새로고침 후에 반영됩니다.
+</p>
+<table>
+  <tbody id="list">
+    <tr>
+      <th>id</th>
+      <th>제목</th>
+      <th>버튼</th>
+    </tr>
+    <% @musics.each do |music| %>
+      <%= render "tr", music: music %>
+    <% end %>
+  </tbody>
+</table>
+<hr>
+<a href="remocon/previous" data-remote="true">이전 곡</a>
+<a href="remocon/next" data-remote="true">다음 곡</a>
+
+<hr>
+<h5>음악 추가</h5>
+<form action="remocon/musics" method="post" data-remote="true">
+  <input type="text" name="url" id="urls" value="">
+  <input type="submit">
+</form>
+<hr>
+<h5>메세지 추가</h5>
+<form action="remocon/messages" method="post" data-remote="true">
+  <input type="text" name="body" id="messages" value="">
+  <input type="submit">
+</form>

@@ -62,5 +62,10 @@ class KakaoController < ApplicationController
   def show
     @musics = Music.all
     @vids = @musics.pluck("vid")
+    @playlists = @musics.to_json
+  end
+
+  def remocon
+    @musics = Music.all
   end
 end
