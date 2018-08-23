@@ -33,12 +33,19 @@ class KakaoController < ApplicationController
       elsif ($choice_flag == 1)
         Message.create(body: @user_msg)
         @text = "전광판으로 \n \"#{@user_msg}\" \n 을(를) 보냈습니다."
-        $choice_flag == 0
+       
       end
     end
 
     @return_msg = {
       :text => @text
+    }
+    @return_msg_chat ={
+      :text => @text,
+      :message_button => {
+        :label => "전광판 보러가기",
+        :url => "https://likelion-music-kitchen-samuelslow.c9users.io/"
+        }
     }
     @keyboard_init = {
       :type => "buttons",
@@ -57,6 +64,12 @@ class KakaoController < ApplicationController
         message:  @return_msg,
         :keyboard => @keyboard_applytext
       }
+    elsif ($choice_flag == 1) 
+      @result = {
+        :message => @return_msg_chat,
+        :keyboard => @keyboard_init
+        }
+        $choice_flag = 0
     else
       @result = {
         :message => @return_msg,
