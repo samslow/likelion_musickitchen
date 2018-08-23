@@ -184,6 +184,7 @@
           var a = document.createElement('li');
           // var valueOfTest = document.getElementById('href').value; /*현재 테스트용 텍스트 입력을 받으면 여기서 벨류 받아와서 들어감 여기로 메세지 넣으면 될듯*/
           a.appendChild(document.createTextNode(valueOfTest));
+          // a.append(valueOfTest);
           a.classList.add('card');
           a.setAttribute("id", "card-anchor");
           parentTarget.appendChild(a);
@@ -198,6 +199,32 @@
               var topPosition = anchor.offsetTop;
               document.getElementById('card-target').scrollTop = topPosition;
           }());
+      }
+
+      function generate_img(src) {
+        var parentTarget = document.getElementById('card-target');
+        parentTarget.lastChild.removeAttribute("id");
+        var a = document.createElement('li');
+        var oImg = document.createElement("img");
+        oImg.setAttribute('src', src);
+        oImg.setAttribute('alt', 'na');
+        oImg.setAttribute('height', '200px')
+        // var valueOfTest = document.getElementById('href').value; /*현재 테스트용 텍스트 입력을 받으면 여기서 벨류 받아와서 들어감 여기로 메세지 넣으면 될듯*/
+        a.appendChild(oImg);
+        a.classList.add('card');
+        a.setAttribute("id", "card-anchor");
+        parentTarget.appendChild(a);
+        // element 삭제
+        if(parentTarget.childElementCount > 10){
+          console.log("[generate] 텍스트 삭제")
+          parentTarget.firstElementChild.remove();
+        }
+
+        (function () {
+            var anchor = document.getElementById("card-anchor");
+            var topPosition = anchor.offsetTop;
+            document.getElementById('card-target').scrollTop = topPosition;
+        }());
       }
 
 
@@ -324,6 +351,44 @@
         }
       }
 
+      function developer() {
+        var dev_ary = ["강원대의 서현석!","이화여대의 엄서영!!","동국대의 노종원!!!","아주대의 장순호!!!!","뮤직키친 개발자들입니다!!"]
+        i = 0
+        var start = setInterval(function() {
+          generate(dev_ary[i])
+          i++;
+          if(i == 5){
+            clearInterval(start)
+          }
+        }, 3000);
+      }
+
+      function doohee(){
+        var doohee_ary = [
+          'http://mblogthumb3.phinf.naver.net/20140113_46/run247_13896030768938VR3y_PNG/2014-01-13_17%3B49%3B55.PNG?type=w2',
+          'https://t1.daumcdn.net/cfile/tistory/217F123952BE61A223',
+          'http://img.etoday.co.kr/pto_db/2014/01/20140112030354_394030_450_482.jpg',
+          'https://upload.wikimedia.org/wikipedia/commons/1/14/2013%EB%85%84_%EB%8C%80%ED%95%9C%EB%AF%BC%EA%B5%AD_%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%A8%B8%EC%9D%B4%EC%9E%90_%EB%A9%8B%EC%9F%81%EC%9D%B4%EC%82%AC%EC%9E%90%EC%B2%98%EB%9F%BC_%EC%84%A4%EB%A6%BD%EC%9E%90_%EC%9D%B4%EB%91%90%ED%9D%AC%EA%B0%80_%ED%95%B4%EB%B3%80%EA%B0%80%EC%97%90%EC%84%9C_%EC%9B%83%EB%8A%94_%EB%AA%A8%EC%8A%B5.png',
+          'https://t1.daumcdn.net/cfile/tistory/21238243580359C521',
+          'https://t1.daumcdn.net/cfile/tistory/226BCF3D5696F11903',
+          'http://img.hankyung.com/photo/201610/AA.12682963.1.jpg',
+          'http://img.hankyung.com/photo/201401/01.8245004.1.jpg',
+          'http://img.yonhapnews.co.kr/photo/yna/YH/2016/09/21/PYH2016092109350001300_P2.jpg',
+          'http://images.jkn.co.kr/data/images/full/897031/2015-04-06-11-04-49-png.png?w=600',
+          'http://cdnweb01.wikitree.co.kr/webdata/editor/201401/13/img_20140113161828_09a2b01b.gif',
+          'http://image.chosun.com/sitedata/image/201701/20/2017012001355_0.jpg',
+          'http://img.sbs.co.kr/newsnet/etv/upload/2014/01/12/30000348136_700.jpg',
+          'http://www.mediaus.co.kr/news/photo/201312/39002_87362_76.gif',
+          'http://mblogthumb1.phinf.naver.net/MjAxNjEyMjhfMjM0/MDAxNDgyOTExMjMyMDUy.o6qNXflczaxhzFmmqAI0O4SzcChNcqUqNwTU0THnZNMg.FKN9Ru5fNyhk1xxQEXz6cW3vYfxib2LWrW-h6j_TiO8g.JPEG.ym_sh/NaverBlog_20161228_164711_08.jpg?type=w2',
+          'https://scontent-icn1-1.cdninstagram.com/vp/8aa6fe53c6502335271d1d922336b8bf/5C14BAAD/t51.2885-15/e35/36813417_280558455838115_8585172675859578880_n.jpg',
+          'https://scontent-icn1-1.cdninstagram.com/vp/143cf531375071aec1a0db3568023401/5BF91570/t51.2885-15/e35/26224266_1458112550981470_351027840310837248_n.jpg'
+        ]
+        var rand = doohee_ary[Math.floor(Math.random() * doohee_ary.length)];
+
+        generate_img(rand);
+      }
+
+
       var channel = pusher.subscribe('dashboard');
       channel.bind('create', function(data) {
         if(data.code == 0){
@@ -337,7 +402,14 @@
           }
         }else if(data.code == 1){
           console.log("[channel] 메세지 추가!")
-          generate(data.result.body)
+          if(data.result.body=="개발자"){
+            developer()
+          }else if(data.result.body == "이두희"){
+            doohee();
+          }else{
+            generate(data.result.body);
+          }
+
         }else if(data.code == 2){
           if(data.result == "previous"){
             console.log("[channel] 리모콘 작동! : 이전 곡")
