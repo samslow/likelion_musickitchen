@@ -255,3 +255,9 @@ body {
 .blank-music {
 	color: red;
 }
+#card-target::-webkit-scrollbar {
+  display: none;
+}
+#music-title::-webkit-scrollbar {
+  display: none;
+}
