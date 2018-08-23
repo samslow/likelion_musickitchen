@@ -64,7 +64,7 @@
               playerVars: {
                   color: 'white',
                   autoplay: 1,
-                  playlist: playlist.join(','),
+                  playlist: setFirst(playlist),
               },
               events: {
                   onReady: initialize,
@@ -73,10 +73,12 @@
           });
       }
 
-      setTimeout(function() {
+      function setFirst(playlist) {
+        old_playlist = playlist
         playlist.splice(0,0,first)
         playlist_json.splice(0,0,first)
-      }, 5000);
+        return old_playlist.join(',')
+      }
 
       /* 유튜브 컨트롤러 정의*/
       function initialize(){
@@ -226,8 +228,8 @@
 
         if(n == 0){
           $("#present-video").text(title)
-          $("#next-video").text(playlist_json[n].title)
-          $("#next-next-video").text(playlist_json[n + 1].title)
+          $("#next-video").text(playlist_json[n + 1].title)
+          $("#next-next-video").text(playlist_json[n + 2].title)
         }else if(n == playlist_json.length - 1){
           $("#present-video").text(playlist_json[n].title)
           $("#next-video").empty();
