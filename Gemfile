@@ -12,6 +12,8 @@ gem 'figaro'
 gem 'pusher'
 # gem 'acts_as_list'
 # gem 'pry-rails'
+gem 'arctic_admin'
+
 gem 'activeadmin', github: 'activeadmin'
 # # Plus integrations with:
 gem 'devise'

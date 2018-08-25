@@ -5,7 +5,14 @@ ActiveAdmin.register Music do
 # permit_params :list, :of, :attributes, :on, :model
 #
 # or
-#
+config.sort_order = 'id_asc'
+
+index do
+  selectable_column
+  id_column
+  column :title
+  actions
+end
 # permit_params do
 #   permitted = [:permitted, :attributes]
 #   permitted << :other if params[:action] == 'create' && current_user.admin?
