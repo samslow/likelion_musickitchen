@@ -14,5 +14,6 @@ class Message < ApplicationRecord
     Message.where(body: nil).delete_all
     Message.where(body: "").delete_all
     Message.where("body LIKE ?","%신청 완료!").delete_all
+    Message.where("body LIKE ?","https://youtu.be/%").delete_all
   end
 end
