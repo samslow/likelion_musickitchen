@@ -15,5 +15,6 @@ class Message < ApplicationRecord
     Message.where(body: "").delete_all
     Message.where("body LIKE ?","%신청 완료!").delete_all
     Message.where("body LIKE ?","https://youtu.be/%").delete_all
+    Message.where("body LIKE ?","https://www.youtube.com/watch%").delete_all
   end
 end
