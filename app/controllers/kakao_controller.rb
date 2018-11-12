@@ -23,24 +23,26 @@ class KakaoController < ApplicationController
       @text = "YouTube Link를 입력 해 주세요!\n* 길이 5분이내\n* 음악링크만 보내주세요"
     elsif @user_msg == "화면에 메시지 띄우기"
       @text = "화면에 메시지를 띄웁니다.\n메시지를 적어주세요"
-      @cuser.flag = 1
+      @cuser.update(flag:1)
     else
       if @cuser.flag == 0
         if @user_msg.include?("?v=")
           @video_id = @user_msg.split('?v=')[1]
           @video = Yt::Video.new id: @video_id
-          Music.create(title: @video.title, vid: @video.id)
+          Music.create(title: @video.title, vid: @video.id, applicant: @cuser.key)
           @text = "재생목록에 \n" + @video.title + "\n(이)가 추가되었습니다."
         elsif @user_msg[-12] == "/"
           @video_id = @user_msg.last(11)
           @video = Yt::Video.new id: @video_id
-          Music.create(title: @video.title, vid: @video.id)
+          Music.create(title: @video.title, vid: @video.id, applicant: @cuser.key)
           @text = "재생목록에 \n" + @video.title + "\n(이)가 추가되었습니다."
         else
           @text = "잘못된 YouTube 주소를 입력하셨습니다."
         end
       elsif @cuser.flag == 1
-        Message.create(body: @user_msg)
+        p @cuser.key + "유저가 전광판에 메시지 보냄"
+        Message.create(body: @user_msg, applicant: @cuser.key)
+
         @text = "전광판으로 \n \"#{@user_msg}\" \n 을(를) 보냈습니다."
       end
     end
@@ -85,7 +87,7 @@ class KakaoController < ApplicationController
         :message => @return_msg_chat,
         :keyboard => @keyboard_init
         }
-        @cuser.flag = 0
+        @cuser.udpate(flag:0)
     else
       @result = {
         :message => @return_msg,

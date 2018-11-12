@@ -40,6 +40,7 @@ ActiveRecord::Schema.define(version: 20181112103648) do
 
   create_table "messages", force: :cascade do |t|
     t.text     "body"
+    t.integer  "applicant"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "deleted_at"
@@ -49,6 +50,7 @@ ActiveRecord::Schema.define(version: 20181112103648) do
   create_table "musics", force: :cascade do |t|
     t.string   "title"
     t.string   "vid"
+    t.integer  "applicant"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer  "duration"
