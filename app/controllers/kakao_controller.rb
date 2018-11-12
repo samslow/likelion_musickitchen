@@ -6,17 +6,26 @@ class KakaoController < ApplicationController
     }
     render json: @keyboard
   end
-  $choice_flag = 0
   def message
+    if User.find_by(key: params[:user_key])
+      p "유저가 있음"
+    else
+      p "노 유저"
+      if User.create(key: params[:user_key])
+        p "유저 생성됨"
+      end
+    end
+    
     @user_msg = params[:content] #사용자의 입력값
-     #0일때 음악, 1일때 메시지
+    @cuser = User.find_by(key: params[:user_key])
+        
     if @user_msg == "음악 신청하기"
       @text = "YouTube Link를 입력 해 주세요!\n* 길이 5분이내\n* 음악링크만 보내주세요"
     elsif @user_msg == "화면에 메시지 띄우기"
       @text = "화면에 메시지를 띄웁니다.\n메시지를 적어주세요"
-      $choice_flag = 1
+      @cuser.flag = 1
     else
-      if ($choice_flag == 0)
+      if @cuser.flag == 0
         if @user_msg.include?("?v=")
           @video_id = @user_msg.split('?v=')[1]
           @video = Yt::Video.new id: @video_id
@@ -30,7 +39,7 @@ class KakaoController < ApplicationController
         else
           @text = "잘못된 YouTube 주소를 입력하셨습니다."
         end
-      elsif ($choice_flag == 1)
+      elsif @cuser.flag == 1
         Message.create(body: @user_msg)
         @text = "전광판으로 \n \"#{@user_msg}\" \n 을(를) 보냈습니다."
       end
@@ -71,12 +80,12 @@ class KakaoController < ApplicationController
         :message => @return_easter,
         :keyboard => @keyboard_init
       }
-    elsif ($choice_flag == 1) 
+    elsif @cuser.flag == 1
       @result = {
         :message => @return_msg_chat,
         :keyboard => @keyboard_init
         }
-        $choice_flag = 0
+        @cuser.flag = 0
     else
       @result = {
         :message => @return_msg,
