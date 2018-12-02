@@ -87,7 +87,7 @@ class KakaoController < ApplicationController
         :message => @return_msg_chat,
         :keyboard => @keyboard_init
         }
-        @cuser.udpate(flag:0)
+        @cuser.update(flag:0)
     else
       @result = {
         :message => @return_msg,
