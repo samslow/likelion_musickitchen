@@ -3,7 +3,7 @@
         <div id="text-section" class="text-section">
             <ul id="card-target" class="card-container"> <!-- 메세지 컨테이너 -->
               <!--메세지  내용-->
-                <li class="card" id="card-anchor">멋사 6기 해커톤 시작합니다!!!!</li></ul>
+                <li class="card" id="card-anchor">MusicKitchen</li></ul>
         </div>
         <!-- <input id="href"> <button onclick="generate()">Generate</button> -->
         <div class="audio-section">
@@ -110,7 +110,7 @@
           title = event.target.j.videoData.title
           changeName(title);
           changeList(previousIndex, title);
-          console.log("[노래 시작될 때] 노래제목 : " + title);
+          console.log("[노래 시작] 노래제목 : " + title);
         }
       }
 
@@ -389,7 +389,7 @@
       }
 
 
-      var channel = pusher.subscribe('dashboard');
+      var channel = pusher.subscribe('mychannel');
       channel.bind('create', function(data) {
         if(data.code == 0){
           console.log("[channel] 뮤직 추가!")

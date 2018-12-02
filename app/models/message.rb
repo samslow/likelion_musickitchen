@@ -6,7 +6,7 @@ class Message < ApplicationRecord
       # data code 추가 0 == music
       unless self.body == ""
         data = {code: 1, result: self.as_json}
-        Pusher.trigger('dashboard', 'create', data) #(channel_name, event_name, data)
+        Pusher.trigger('mychannel', 'create', data) #(channel_name, event_name, data)
       end
   end
 

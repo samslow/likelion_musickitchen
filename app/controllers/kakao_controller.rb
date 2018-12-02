@@ -6,6 +6,7 @@ class KakaoController < ApplicationController
     }
     render json: @keyboard
   end
+  
   def message
     if User.find_by(key: params[:user_key])
       p "유저가 있음"
@@ -40,8 +41,8 @@ class KakaoController < ApplicationController
           @text = "잘못된 YouTube 주소를 입력하셨습니다."
         end
       elsif @cuser.flag == 1
-        p @cuser.key + "유저가 전광판에 메시지 보냄"
-        Message.create(body: @user_msg, applicant: @cuser.key)
+        p @cuser.key + "유저가 전광판에 \"" + @user_msg + "\" 메시지 보냄"
+        Message.create(body: @user_msg, applicant: @cuser.key, state: 0)
 
         @text = "전광판으로 \n \"#{@user_msg}\" \n 을(를) 보냈습니다."
       end

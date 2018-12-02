@@ -4,8 +4,8 @@ class Music < ApplicationRecord
     def create_music_notification
         # data code 추가 0 == music
         data = {code: 0, result: self.as_json}
-        Pusher.trigger('dashboard', 'create', data) #(channer_name, event_name, data)
-        Message.create(body: "#{self.title} \r\n 곡 신청 완료!")
+        Pusher.trigger('mychannel', 'create', data) #(channer_name, event_name, data)
+        Message.create(body: "#{self.title} \r\n 곡 신청 완료!", applicant: self.applicant, state: 1)
     end
 
     def self.create_by_yt(url, status = 0)

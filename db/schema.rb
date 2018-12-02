@@ -41,6 +41,7 @@ ActiveRecord::Schema.define(version: 20181112103648) do
   create_table "messages", force: :cascade do |t|
     t.text     "body"
     t.integer  "applicant"
+    t.integer  "state"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "deleted_at"
