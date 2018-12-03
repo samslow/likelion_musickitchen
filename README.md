@@ -1,5 +1,5 @@
 <div align="middle">
-    <img src="./readme_assets/logo.png" style="width:300px;"/>
+    <img src="./readme_assets/logo.png" height="300px">
 </div>
 
 <h1 align="center">뮤직키친-카톡 플친 플레이리스트 공유 서비스</h1>
