@@ -1,10 +1,14 @@
-<img src="./readme_assets/logo.png" style="width:300px;">
+<div align="middle">
+    <img src="./readme_assets/logo.png" style="width:300px;"/>
+</div>
 
-<h2 align="center">뮤직키친-카톡 플친 플레이리스트 공유 서비스</div>
-<div align="center">
+<h1 align="center">뮤직키친-카톡 플친 플레이리스트 공유 서비스</h1>
+
+<p align="center">
     <img src="https://img.shields.io/badge/Coverage-1%20thd-brightgreen.svg"/>
     <img src="https://img.shields.io/badge/Lang-ruby-red.svg"/>
-    <img src="https://img.shields.io/badge/release-v0.0.1-orange.svg">
+    <img src="https://img.shields.io/badge/release-v0.0.1-orange.svg"/>
+</p>
 
 
 ## Overview
