@@ -15,9 +15,9 @@
 
 카카오톡 플러스친구 API를 활용해 친구와의 플레이리스트 공유 서비스 
 
-![list](./readme_assets/list.png)
+<img src="./readme_assets/list.png" height="600px">
 
-![remocon](./readme_assets/remocon.png)
+<img src="./readme_assets/remocon.png" height="600px">
 
 ## Usage
 
