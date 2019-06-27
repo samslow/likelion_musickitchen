@@ -115,14 +115,26 @@ class KakaoController < ApplicationController
     }
     render json: @result
   end
-  
+
   def msg
     p params
     p params[:detailParams][:msg][:value]
+
+    if User.find_by(key: params[:user][:id])
+      p "유저가 있음"
+    else
+      if User.create(key: params[:user][:id])
+        p "유저 생성됨"
+      end
+    end
+    
+    @user_msg = params[:detailParams][:msg][:value] #사용자의 입력값
+    @user = User.find_by(key: params[:user][:id])
     @result = {
-      :message => "메시지를 받았습니다.",
-      :keyboard => "키보드입니다."
+      user: @user.key,
+      :message => @user_msg
     }
+    p @result
     render json: @result
   end
 end
