@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   ActiveAdmin.routes(self)
   get '/keyboard' => 'kakao#keyboard'
   post '/message' => 'kakao#message'
+  post '/ytLink' => 'kakao#ytLink'
   get 'remocon' => "remocon#show"
 
   get 'remocon/delete_list/:id' => "remocon#delete"

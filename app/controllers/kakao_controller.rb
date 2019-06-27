@@ -75,7 +75,7 @@ class KakaoController < ApplicationController
       }
     elsif @user_msg == "화면에 메시지 띄우기"
       @result = {
-        message:  @return_msg,
+        message: @return_msg,
         :keyboard => @keyboard_applytext
       }
     elsif @user_msg == "개발자"
@@ -106,5 +106,13 @@ class KakaoController < ApplicationController
 
   def remocon
     @musics = Music.all
+  end
+
+  def ytLink
+    @result = {
+      :message => "@return_msg",
+      :keyboard => "@keyboard_init"
+    }
+    render json: @result
   end
 end
