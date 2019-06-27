@@ -116,7 +116,10 @@ class KakaoController < ApplicationController
     render json: @result
   end
   def msg
+    p "start"
     p params
+    p "end"
+    p params[:detailParams][:msg][:value]
     @result = {
       :message => "메시지를 받았습니다.",
       :keyboard => "키보드입니다."
