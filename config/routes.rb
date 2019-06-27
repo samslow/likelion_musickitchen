@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   get '/keyboard' => 'kakao#keyboard'
   post '/message' => 'kakao#message'
   post '/ytLink' => 'kakao#ytLink'
+  post '/msg' => 'kakao#msg'
   get 'remocon' => "remocon#show"
 
   get 'remocon/delete_list/:id' => "remocon#delete"
