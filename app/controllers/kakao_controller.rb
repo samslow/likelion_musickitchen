@@ -128,8 +128,11 @@ class KakaoController < ApplicationController
       end
     end
     
-    @user_msg = params[:detailParams][:msg][:value] #사용자의 입력값
     @user = User.find_by(key: params[:user][:id])
+    @user_msg = params[:detailParams][:msg][:value] #사용자의 입력값
+    p @user.key + "유저가 전광판에 \"" + @user_msg + "\" 메시지 보냄"
+    Message.create(body: @user_msg, applicant: @user.key, state: 0)
+
     @result = {
       user: @user.key,
       :message => @user_msg
