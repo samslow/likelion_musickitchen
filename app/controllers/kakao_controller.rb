@@ -118,18 +118,18 @@ class KakaoController < ApplicationController
 
   def msg
     p params
-    p params[:detailParams][:msg][:value]
+    p params[:action][:detailParams][:msg][:value]
 
-    if User.find_by(key: params[:user][:id])
+    if User.find_by(key: params[:userRequest][:user][:id])
       p "유저가 있음"
     else
-      if User.create(key: params[:user][:id])
+      if User.create(key: params[:userRequest][:user][:id])
         p "유저 생성됨"
       end
     end
     
-    @user = User.find_by(key: params[:user][:id])
-    @user_msg = params[:detailParams][:msg][:value] #사용자의 입력값
+    @user = User.find_by(key: params[:userRequest][:user][:id])
+    @user_msg = params[:action][:detailParams][:msg][:value] #사용자의 입력값
     p @user.key + "유저가 전광판에 \"" + @user_msg + "\" 메시지 보냄"
     Message.create(body: @user_msg, applicant: @user.key, state: 0)
 
