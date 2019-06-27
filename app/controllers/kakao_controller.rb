@@ -115,4 +115,11 @@ class KakaoController < ApplicationController
     }
     render json: @result
   end
+  def msg
+    @result = {
+      :message => "메시지를 받았습니다.",
+      :keyboard => "키보드입니다."
+    }
+    render json: @result
+  end
 end
