@@ -109,6 +109,31 @@ class KakaoController < ApplicationController
   end
 
   def ytLink
+    if User.find_by(key: params[:userRequest][:user][:id])
+      p "유저가 있음"
+    else
+      if User.create(key: params[:userRequest][:user][:id])
+        p "유저 생성됨"
+      end
+    end
+    
+    @user = User.find_by(key: params[:userRequest][:user][:id])
+    @user_msg = params[:kakao][:action][:detailParams][:msg][:value] #사용자의 입력값
+
+    if @user_msg.include?("?v=")
+      @video_id = @user_msg.split('?v=')[1]
+      @video = Yt::Video.new id: @video_id
+      Music.create(title: @video.title, vid: @video.id, applicant: @user.key)
+      @text = "재생목록에 \n" + @video.title + "\n(이)가 추가되었습니다."
+    elsif @user_msg[-12] == "/"
+      @video_id = @user_msg.last(11)
+      @video = Yt::Video.new id: @video_id
+      Music.create(title: @video.title, vid: @video.id, applicant: @user.key)
+      @text = "재생목록에 \n" + @video.title + "\n(이)가 추가되었습니다."
+    else
+      @text = "잘못된 YouTube 주소를 입력하셨습니다."
+    end
+
     @result = {
       :message => "@return_msg",
       :keyboard => "@keyboard_init"
@@ -117,9 +142,6 @@ class KakaoController < ApplicationController
   end
 
   def msg
-    p params
-    p params[:kakao][:action][:detailParams][:msg][:value]
-
     if User.find_by(key: params[:userRequest][:user][:id])
       p "유저가 있음"
     else

@@ -4,6 +4,9 @@ class CreateMusics < ActiveRecord::Migration[5.0]
       t.string :title
       t.string :vid
       t.integer :applicant
+      t.integer :duration
+      t.integer :status
+      
 
       t.timestamps
     end
