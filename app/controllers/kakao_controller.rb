@@ -119,7 +119,7 @@ class KakaoController < ApplicationController
     
     @user = User.find_by(key: params[:userRequest][:user][:id])
     @user_msg = params[:kakao][:action][:detailParams][:msg][:value] #사용자의 입력값
-
+    @youtubeApi = "https://www.googleapis.com/youtube/v3/videos?id=7lCDEYXw3mM&key=AIzaSyDQPB4uLv0JRsc96jVHaCBv3ykhAWAFb4w&part=snippet"
     if @user_msg.include?("?v=")
       @video_id = @user_msg.split('?v=')[1]
       @video = Yt::Video.new id: @video_id
