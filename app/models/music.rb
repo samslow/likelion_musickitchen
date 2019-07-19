@@ -10,9 +10,14 @@ class Music < ApplicationRecord
 
     def self.create_by_yt(url, status = 0)
       if url.include?("?v=")
-        vid = url.split('?v=')[1]
-        video = Yt::Video.new id: vid
-        music = Music.create(title: video.title, vid: video.id, duration: video.duration, status: status)
+        videoId = url.split('?v=')[1] # mw5VIEIvuMI
+        videoReq = "https://www.googleapis.com/youtube/v3/videos?id=#{videoId}&key=#{ENV["GOOGLE_YOUTUBE_KEY"]}&part=snippet,contentDetails"
+        video = RestClient.get(videoReq)
+        parsed = JSON.parse(video)
+        music = Music.create(
+          title: parsed['items'][0]['snippet']['title'],
+          vid: parsed['items']['id'],
+          duration: video.duration, status: status)
         return music
       else
         return false

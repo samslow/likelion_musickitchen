@@ -119,20 +119,20 @@ class KakaoController < ApplicationController
     
     @user = User.find_by(key: params[:userRequest][:user][:id])
     @user_msg = params[:kakao][:action][:detailParams][:msg][:value] #사용자의 입력값
-    @youtubeApi = "https://www.googleapis.com/youtube/v3/videos?id=7lCDEYXw3mM&key=AIzaSyDQPB4uLv0JRsc96jVHaCBv3ykhAWAFb4w&part=snippet"
     if @user_msg.include?("?v=")
       @video_id = @user_msg.split('?v=')[1]
-      @video = Yt::Video.new id: @video_id
-      Music.create(title: @video.title, vid: @video.id, applicant: @user.key)
       @text = "재생목록에 \n" + @video.title + "\n(이)가 추가되었습니다."
+      Music.create(title: @video.title, vid: @video.id, applicant: @user.key)
     elsif @user_msg[-12] == "/"
       @video_id = @user_msg.last(11)
-      @video = Yt::Video.new id: @video_id
-      Music.create(title: @video.title, vid: @video.id, applicant: @user.key)
       @text = "재생목록에 \n" + @video.title + "\n(이)가 추가되었습니다."
+      Music.create(title: @video.title, vid: @video.id, applicant: @user.key)
     else
       @text = "잘못된 YouTube 주소를 입력하셨습니다."
     end
+    @youtubeApi = "https://www.googleapis.com/youtube/v3/videos?id=#{@video_id}&key=ENV["GOOGLE_YOUTUBE_KEY"]&part=snippet"
+    https://www.googleapis.com/youtube/v3/videos?id=Irw-ag2H5iU&key=AIzaSyCPhGgiojkk36qH-DGKdHoJ-yrR5EJP6ww&part=snippet
+    RestClient.get(@youtubeApi)
 
     @result = {
       :message => "@return_msg",

@@ -5,13 +5,11 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-# gem 'rest-client'
-gem 'httparty'
-gem 'nokogiri'
+gem 'rest-client'
 gem 'figaro'
 gem 'pusher'
 # gem 'acts_as_list'
-# gem 'pry-rails'
+gem 'pry-rails'
 gem 'arctic_admin'
 gem 'activeadmin', github: 'activeadmin'
 # # Plus integrations with:
