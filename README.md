@@ -2,7 +2,7 @@
     <img src="./readme_assets/logo.png" height="300px">
 </div>
 
-<h1 align="center">뮤직키친-카톡 플친 플레이리스트 공유 서비스</h1>
+<h1 align="center">뮤직키친-챗봇 기반 플레이리스트 공유 서비스</h1>
 
 <p align="center">
     <img src="https://img.shields.io/badge/Coverage-1%20thd-brightgreen.svg"/>
@@ -16,7 +16,6 @@
 카카오톡 플러스친구 API를 활용해 친구와의 플레이리스트 공유 서비스 
 <div align="middle">
     <img src="./readme_assets/list.png" height="600px">
-    <img src="./readme_assets/remocon.png" height="600px">
 </div>
 
 ## Usage
