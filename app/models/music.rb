@@ -18,7 +18,6 @@ class Music < ApplicationRecord
           title: parsed['items'][0]['snippet']['title'],
           vid: parsed['items']['id'],
           duration: parsed['items']['contentDetails']['duration'], status: status)
-        # 임시
         return music
       else
         return false
