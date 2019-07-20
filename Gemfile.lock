@@ -196,7 +196,7 @@ GEM
       activerecord (= 5.2.3)
       activestorage (= 5.2.3)
       activesupport (= 5.2.3)
-      bundler (>= 1.3.0)
+      bundler (>= 2.0.0)
       railties (= 5.2.3)
       sprockets-rails (>= 2.0.0)
     rails-dom-testing (2.0.3)
@@ -318,6 +318,7 @@ DEPENDENCIES
   activeadmin!
   activeadmin_addons
   arctic_admin
+  bundler (~> 2.0)
   byebug
   coffee-rails (~> 4.2)
   devise
