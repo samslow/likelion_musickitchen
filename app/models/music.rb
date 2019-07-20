@@ -17,7 +17,7 @@ class Music < ApplicationRecord
         music = Music.create(
           title: parsed['items'][0]['snippet']['title'],
           vid: parsed['items']['id'],
-          duration: parsed['items']['contentDetails']['duration'],
+          duration: parsed['items'][0]['contentDetails']['duration'].split('M').map{|t| t[/\d+/]}.join(),
           status: status)
         return music
       else
