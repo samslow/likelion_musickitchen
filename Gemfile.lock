@@ -119,9 +119,6 @@ GEM
       activesupport (>= 4.1)
     http-cookie (1.0.3)
       domain_name (~> 0.5)
-    httparty (0.17.0)
-      mime-types (~> 3.0)
-      multi_xml (>= 0.5.2)
     httpclient (2.8.3)
     i18n (1.6.0)
       concurrent-ruby (~> 1.0)
@@ -167,7 +164,6 @@ GEM
     mini_portile2 (2.4.0)
     minitest (5.11.3)
     multi_json (1.13.1)
-    multi_xml (0.6.0)
     netrc (0.11.0)
     nio4r (2.3.1)
     nokogiri (1.10.3)
@@ -326,11 +322,9 @@ DEPENDENCIES
   coffee-rails (~> 4.2)
   devise
   figaro
-  httparty
   jbuilder (~> 2.5)
   jquery-rails
   listen (~> 3.0.5)
-  nokogiri
   paranoia (~> 2.2)
   pg (~> 0.21)
   pry-rails
@@ -350,4 +344,4 @@ DEPENDENCIES
   web-console (>= 3.3.0)
 
 BUNDLED WITH
-   1.17.3
+   2.0.2
