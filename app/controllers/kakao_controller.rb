@@ -131,7 +131,7 @@ class KakaoController < ApplicationController
       @text = "잘못된 YouTube 주소를 입력하셨습니다."
     end
     @youtubeApi = "https://www.googleapis.com/youtube/v3/videos?id=#{@video_id}&key=ENV["GOOGLE_YOUTUBE_KEY"]&part=snippet"
-    https://www.googleapis.com/youtube/v3/videos?id=Irw-ag2H5iU&key=AIzaSyCPhGgiojkk36qH-DGKdHoJ-yrR5EJP6ww&part=snippet
+    
     RestClient.get(@youtubeApi)
 
     @result = {
