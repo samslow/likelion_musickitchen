@@ -5,9 +5,9 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-gem 'rest-client'
+# gem 'rest-client'
+gem 'httparty'
 gem 'nokogiri'
-gem 'yt', '~> 0.28.0'
 gem 'figaro'
 gem 'pusher'
 # gem 'acts_as_list'
