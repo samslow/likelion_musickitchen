@@ -1,8 +1,8 @@
 GIT
   remote: https://github.com/activeadmin/activeadmin.git
-  revision: 3dc13b67bc9ac5a729b960eee7bf40008cb45dd7
+  revision: cbce3550d41e745fbf3c9160b34b5848712f48cc
   specs:
-    activeadmin (2.1.0)
+    activeadmin (2.2.0)
       arbre (~> 1.2, >= 1.2.1)
       formtastic (~> 3.1)
       formtastic_i18n (~> 0.4)
@@ -79,11 +79,12 @@ GEM
       babel-source (>= 4.0, < 6)
       execjs (~> 2.0)
     bcrypt (3.1.13)
-    bindex (0.7.0)
+    bindex (0.8.1)
     builder (3.2.3)
     byebug (11.0.1)
     codemirror-rails (5.16.0)
       railties (>= 3.0, < 6.0)
+    coderay (1.1.2)
     coffee-rails (4.2.2)
       coffee-script (>= 2.2.0)
       railties (>= 4.0.0)
@@ -99,7 +100,7 @@ GEM
       railties (>= 4.1.0, < 6.0)
       responders
       warden (~> 1.2.3)
-    domain_name (0.5.20180417)
+    domain_name (0.5.20190701)
       unf (>= 0.0.5, < 1.0.0)
     erubi (1.8.0)
     execjs (2.7.0)
@@ -118,9 +119,6 @@ GEM
       activesupport (>= 4.1)
     http-cookie (1.0.3)
       domain_name (~> 0.5)
-    httparty (0.17.0)
-      mime-types (~> 3.0)
-      multi_xml (>= 0.5.2)
     httpclient (2.8.3)
     i18n (1.6.0)
       concurrent-ruby (~> 1.0)
@@ -162,21 +160,25 @@ GEM
       mime-types-data (~> 3.2015)
     mime-types-data (3.2019.0331)
     mimemagic (0.3.3)
-    mini_mime (1.0.1)
+    mini_mime (1.0.2)
     mini_portile2 (2.4.0)
     minitest (5.11.3)
     multi_json (1.13.1)
-    multi_xml (0.6.0)
     netrc (0.11.0)
-    nio4r (2.3.1)
+    nio4r (2.4.0)
     nokogiri (1.10.3)
       mini_portile2 (~> 2.4.0)
     orm_adapter (0.5.0)
     paranoia (2.4.2)
       activerecord (>= 4.0, < 6.1)
     pg (0.21.0)
+    pry (0.12.2)
+      coderay (~> 1.1.0)
+      method_source (~> 0.9.0)
+    pry-rails (0.3.9)
+      pry (>= 0.10.4)
     puma (3.12.1)
-    pusher (1.3.2)
+    pusher (1.3.3)
       httpclient (~> 2.7)
       multi_json (~> 1.0)
       pusher-signature (~> 0.1.8)
@@ -320,13 +322,12 @@ DEPENDENCIES
   coffee-rails (~> 4.2)
   devise
   figaro
-  httparty
   jbuilder (~> 2.5)
   jquery-rails
   listen (~> 3.0.5)
-  nokogiri
   paranoia (~> 2.2)
   pg (~> 0.21)
+  pry-rails
   puma (~> 3.0)
   pusher
   rails (~> 5.2.2)
@@ -343,4 +344,4 @@ DEPENDENCIES
   web-console (>= 3.3.0)
 
 BUNDLED WITH
-   1.17.3
+   2.0.2
